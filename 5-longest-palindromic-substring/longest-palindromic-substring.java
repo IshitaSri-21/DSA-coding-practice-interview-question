@@ -3,29 +3,27 @@ class Solution {
         if(s.length()<=1){
             return s;
         }
-        int maxLen=1;
         String maxStr=s.substring(0,1);
 
-        for(int i=0;i<s.length();i++){
-            for(int j=i+maxLen;j<=s.length();j++){
-                if(j-i>maxLen && isPalindrome(s.substring(i,j))){
-                    maxLen=j-i;
-                    maxStr=s.substring(i,j);
+        for(int i=0;i<s.length()-1;i++){
+            String odd=expandFromCenter(s,i,i);
+            String even=expandFromCenter(s,i,i+1);
+
+            if(odd.length()>maxStr.length()){
+                maxStr=odd;
+            }
+            if(even.length()>maxStr.length()){
+                maxStr=even;
             }
         }
+        return maxStr;
     }
-    return maxStr;
+    private String expandFromCenter(String s,int i,int j){
+        while(i>=0 && j< s.length() && s.charAt(i)==s.charAt(j)){
+            i--;
+            j++;
+        }
+        return s.substring(i+1,j);
+    }
 }
- private boolean isPalindrome(String str){
-    int i=0;
-    int j=str.length()-1;
-
-    while(i<j){
-    if(str.charAt(i)!=str.charAt(j)){
-        return false;
-    }
-    i++;
-    j--;
- }
- return true;
-}}
+           
