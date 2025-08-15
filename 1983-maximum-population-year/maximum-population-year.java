@@ -1,30 +1,21 @@
 class Solution {
     public int maximumPopulation(int[][] logs) {
-        int minYear = Integer.MAX_VALUE;
-        int maxYear = Integer.MIN_VALUE;
+        int arr[]=new int[101];
 
-        for (int[] log : logs) {
-            minYear = Math.min(minYear, log[0]);
-            maxYear = Math.max(maxYear, log[1]);
+        for(int log[]:logs){
+            int by=log[0],dy=log[1];
+            arr[by-1950]++;
+            arr[dy-1950]--;
         }
-
-        int maxPopulation = 0;
-        int earliestYear = minYear;
-
-        for (int year = minYear; year < maxYear; year++) {
-            int population = 0;
-            for (int[] log : logs) {
-               
-                if (year >= log[0] && year < log[1]) {
-                    population++;
-                }
-            }
-        
-            if (population > maxPopulation) {
-                maxPopulation = population;
-                earliestYear = year;
+        int max=arr[0];
+        int maxYear=1950;
+        for(int i=1;i<101;i++){
+            arr[i]+=arr[i-1];
+            if(max<arr[i]){
+                max=arr[i];
+                maxYear=i+1950;
             }
         }
-        return earliestYear;
+        return maxYear;
     }
 }
