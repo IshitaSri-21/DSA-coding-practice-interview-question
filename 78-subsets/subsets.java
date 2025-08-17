@@ -1,24 +1,17 @@
 class Solution {
-    static List<List<Integer>>arr ;
-        public void helper(int i,int[] nums,ArrayList<Integer>ans){
-
-            if(i==nums.length){
-                ArrayList<Integer>list=new ArrayList<>();
-                for(int j=0;j<ans.size();j++){
-                    list.add(ans.get(j));
-                }
-                arr.add(list);
-                return;
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>>ans=new ArrayList<>();
+        int n=nums.length;
+        int total=(1<<n);
+        for(int num=0;num<total;num++){
+            List<Integer>list=new ArrayList<>();
+            for(int bitIdx=0;bitIdx<n;bitIdx++){
+                int mask=(1<<bitIdx);
+                if((num&mask)!=0)
+                list.add(nums[bitIdx]);
             }
-            helper(i+1,nums,ans);
-                ans.add(nums[i]);
-                helper(i+1,nums,ans);
-                ans.remove(ans.size()-1);
+            ans.add(list);
         }
-            public List<List<Integer>>subsets(int[] nums){
-                arr=new ArrayList<>();
-                ArrayList<Integer>ans=new ArrayList<>();
-                helper(0,nums,ans);
-                return arr;
-            }
-        }
+        return ans;
+    }
+}
