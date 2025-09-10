@@ -21,7 +21,7 @@ class Solution {
         for(int i=1;i<k;i++){
             first=first.next;
         }
-            for(int j=1;j<n-k+1;j++){
+            for(int i=1;i<n-k+1;i++){
                 second=second.next;
             }
             int tempVal=first.val;
