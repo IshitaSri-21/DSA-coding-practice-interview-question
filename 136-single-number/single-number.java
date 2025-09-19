@@ -1,11 +1,14 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        Arrays.sort(nums);
-        int i=0;
-        while(i<nums.length-1){
-            if(nums[i]!=nums[i+1]) return nums[i];
-            i+=2;
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int ele:nums){
+            if(map.containsKey(ele)) map.put(ele,2);
+            else map.put(ele,1);
         }
-        return nums[nums.length-1];
+        for(int key:map.keySet()){
+            int freq=map.get(key);
+            if(freq==1) return key;
+        }
+        return 33;
     }
 }
