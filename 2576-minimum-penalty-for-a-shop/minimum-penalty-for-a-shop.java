@@ -14,11 +14,11 @@ class Solution {
         int[] penalty=new int[n+1];
         int min=n+5;
         for(int i=0;i<=n;i++){
-            penalty[i]=pre[i]+suf[i];
-            min=Math.min(min,penalty[i]);
+           pre[i]+=suf[i];
+           min=Math.min(min,pre[i]);
         }
           for(int i=0;i<=n;i++){
-            if(penalty[i]==min) return i;
+            if(pre[i]==min) return i;
     }
     return 3525;
     }
